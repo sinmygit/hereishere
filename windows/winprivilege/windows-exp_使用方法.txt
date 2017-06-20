@@ -1,0 +1,6 @@
+./windows-exploit-suggester.py --database 2014-06-06-mssb.xls --systeminfo win7sp1-systeminfo.txt 
+将系统systeminfo信息输出到这个txt
+
+下面这条指令可以列出指定操作系统版本存在的所有可能EXP(假设目标系统没有打任何补丁)    
+
+$ ./windows-exploit-suggester.py --database 2014-06-06-mssb.xlsx --ostext 'windows server 2008 r2' 

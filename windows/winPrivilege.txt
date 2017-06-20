@@ -1,0 +1,11 @@
+systeminfo
+hostname
+echo %username%
+net users
+net user %username%
+route print
+netsh firewall show state
+netsh firewall show config
+schtasks /query /fo LIST /v
+net start
+findstr /si password *.xml *.ini *.txt

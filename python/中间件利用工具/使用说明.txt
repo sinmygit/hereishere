@@ -1,0 +1,10 @@
+requests>=2.2.1
+
+
+./xx.py -i 192.168.1.1 每a jboss 每fingerprint
+												 				每jb-info 
+												 				每jb-list
+												 				每deploy /var/www/cmd.war
+												 				每verb-tamper /var/www/cmd.war
+												 				
+												
