@@ -1,8 +1,9 @@
 #!/usr/bin/python
- 
 # SLAE - Assignment #2: Shell Reverse TCP Shellcode (Linux/x86) Wrapper
 # Author:  Julien Ahrens (@MrTuxracer)
 # Website:  http://www.rcesecurity.com 
+
+#execute reverse file  
 
 import sys
 from os import system

