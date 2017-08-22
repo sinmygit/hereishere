@@ -226,3 +226,5 @@ highlight_file('test.php');
 权限维持（Persistence）
 信息收集（Exfiltration）
 信息侦察（Recon）
+
+https://klionsec.github.io/2017/07/31/socat-meterpreter/ socat 端口转发
