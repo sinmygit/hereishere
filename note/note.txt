@@ -238,6 +238,7 @@ dsquery subnet        #查看域IP范围
 
 
 adfind LDAP查询
+ldifde 信息收集
 
 
 nltest 来测试一个域中的域控制器和运行Windows NT的域成员之间的信任关系
