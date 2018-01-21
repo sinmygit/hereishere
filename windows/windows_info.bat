@@ -30,6 +30,3 @@ echo 'name="wifiname" key=clear'
 
 echo ######查看系统中安装的软件以及版本######
 wmic product get name,version
-
-
-pause

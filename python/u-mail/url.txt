@@ -1,6 +1,0 @@
-mail.tznews.cn
-mail.hqep.com.cn
-mail.amplly.com
-mail.junda-jy.com.cn
-mail.wynca.com
-wfzlpt.weifang.gov.cn
