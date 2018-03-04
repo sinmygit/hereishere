@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title> New Document </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <meta name="Generator" content="EditPlus">
+        <meta name="Author" content="">
+        <meta name="Keywords" content="">
+        <meta charset="utf-8" />
+        <meta name="Description" content="">
+        <script id=clientEventHandlersJS language=javascript>
+            function allinfo() {
+                var appName = navigator.appName; 
+                var appVersion = navigator.appVersion;
+                var cookieEnabled = navigator.cookieEnabled; 
+                var cpuClass = navigator.cpuClass;
+
+                var mimeType = navigator.mimeTypes;
+                var platform = navigator.platform; 
+                var plugins = navigator.plugins;
+                var userLanguage = navigator.userLanguage;
+                var userAgent = navigator.userAgent;
+                var systemLanguage = navigator.systemLanguage;
+
+                var info = "<table border=1>";
+                var type = "";
+                if (isIe()) {
+                    type = "IE";
+                } else if (isFireFox()) {
+                    type = "firefox";
+                }
+                info += "<tr><td>btype：</td><td>" + type + "</td></tr>";
+
+                info += "<tr><td>UA：</td><td>" + userAgent + "</td></tr>";
+                info += "<tr><td>appName：</td><td>" + appName + "</td></tr>";
+                info += "<tr><td>appVersion: </td><td>" + appVersion + "</td></tr>";
+                info += "<tr><td>cookieEnabled：</td><td>" + cookieEnabled + "</td></tr>";
+                info += "<tr><td>cpuClass：</td><td>" + cpuClass + "</td></tr>";
+                info += "<tr><td>mimeType.length：</td><td>" + mimeType.length + "</td></tr>";
+                info += "<tr><td>platform：</td><td>" + platform + "</td></tr>";
+                info += "<tr><td>plugins：</td><td>" + plugins + "</td></tr>";
+                info += "<tr><td>plugin numbers: </td><td>" + plugins.length + "</td></tr>";
+                info += "<tr><td>plugin name：</td><td>" + getPluginName() + "</td></tr>";
+                info += "<tr><td>userLanguage: </td><td>" + userLanguage + "</td></tr>";
+                info += "<tr><td>systemLanguage：</td><td>" + systemLanguage + "</td></tr>";
+                info += "<tr><td>Director：</td><td>" + checkePlugs("Director") + "</td></tr>";
+                info += "<tr><td>javaEnabled：</td><td>" + navigator.javaEnabled() + "</td></tr>";
+                info += "<tr><td>quickTime：</td><td>" + checkePlugs("QuickTime") + "</td></tr>";
+                info += "<tr><td>flash：</td><td>" + checkePlugs('Shockwave Flash') + "</td></tr>";
+                info += "<tr><td>MediaPlayer：</td><td>" + checkePlugs("MediaPlayer") + "</td></tr>";
+                info += "<tr><td>realPlayer: </td><td>" + checkePlugs("RealPlayer") + "</td></tr>";
+                info += "<tr><td>windows_height: </td><td>" + window.screen.height + "</td></tr>";
+                info += "<tr><td>windows_width: </td><td>" + window.screen.width + "</td></tr>";
+                info += "<tr><td>bits：</td><td>" + window.screen.colorDepth + "</td></tr>";
+                info += "<tr><td>plx：</td><td>" + window.screen.deviceXDPI + "plx</td></tr>";
+                info += "</table>";
+                document.getElementById("elInfo").innerHTML = info;
+                return info;
+
+                var appCodeName = navigator.appCodeName; 
+                var appMinorVersion = navigator.appMinorVersion; 
+
+                var language = navigator.language; 
+
+                var onLine = navigator.onLine; 
+
+                var opsProfile = navigator.opsProfile;
+
+                var oscpu = navigator.oscpu;
+
+                var product = navigator.product;
+
+                var productSub = navigator.productSub;
+
+                var securityPolicy = navigator.securityPolicy;
+
+                var userProfile = navigator.userProfile;
+
+                var vender = navigator.vender;
+
+                var vendorSub = navigator.vendorSub;
+
+            }
+
+            function getPluginName() {
+                var info = "";
+                var plugins = navigator.plugins;
+                if (plugins.length > 0) {
+                    for (i = 0; i < navigator.plugins.length; i++) {
+                        info += navigator.plugins[i].name + ";";
+                    }
+                }
+                return info;
+            }
+
+            function checkePlugs(pluginname) {
+                var f = "-"
+                var plugins = navigator.plugins;
+                if (plugins.length > 0) {
+                    for (i = 0; i < navigator.plugins.length; i++) {
+                        if (navigator.plugins[i].name.indexOf(pluginname) >= 0) {
+                            f = navigator.plugins[i].description.split(pluginname)[1];
+                            return f;
+                            break;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            function isIe() {
+                var i = navigator.userAgent.toLowerCase().indexOf("msie");
+                return i >= 0;
+            }
+
+            function isFireFox() {
+                var i = navigator.userAgent.toLowerCase().indexOf("firefox");
+                return i >= 0;
+            }
+
+            var locator = new ActiveXObject("WbemScripting.SWbemLocator");
+            var service = locator.ConnectServer(".");
+
+            function cpuInfo() { 
+                var properties = service.ExecQuery("SELECT * FROM Win32_Processor");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr  bgcolor='#CDEDED' style='font-weight: bold;' ><td width='450' >CPU info</td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr style='color: red'><td >CPU number:" + p.ProcessorID + "</td></tr>";
+                    info += "<tr><td >" + p.Caption + "</td></tr>";
+                    info += "<tr><td >CPU deviceid：" + p.DeviceID + "</td></tr>";
+                    info += "<tr><td >CPU name：" + p.Name + "</td></tr>";
+                    info += "<tr><td >CPU stauts：" + p.CpuStatus + "</td></tr>";
+                    info += "<tr><td >CPU available：" + p.Availability + "</td></tr>";
+                    info += "<tr><td >CUP Level：" + p.Level + "</td></tr>";
+                    info += "<tr><td >system name：" + p.SystemName + "</td></tr>";
+                    info += "<tr><td >Processor Type：" + p.ProcessorType + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function softDisk() { 
+                var properties = service.ExecQuery("SELECT * FROM Win32_FloppyDrive");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr  bgcolor='#CDEDED' style='font-weight: bold;' ><td width='450'>soft</td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr><td >" + p.Description + "</td></tr>";
+                    info += "<tr><td >" + p.DeviceID + "</td></tr>";
+                    info += "<tr><td >" + p.Status + "</td></tr>";
+                    info += "<tr><td >" + p.Manufacuturer + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function RomInfo() { 
+                var properties = service.ExecQuery("SELECT * FROM Win32_CDROMDrive");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr bgcolor='#CDEDED' style='font-weight: bold;'><td width='450' >CD-ROM </td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr><td >name：" + p.Caption + "</td></tr>";
+                    info += "<tr><td >description：" + p.Description + "</td></tr>";
+                    info += "<tr><td >drive：" + p.Drive + "</td></tr>";
+                    info += "<tr><td >status：" + p.Status + "</td></tr>";
+                    info += "<tr><td >MediaLoaded：" + p.MediaLoaded + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function keyBoardInfo() {
+                var properties = service.ExecQuery("SELECT * FROM Win32_Keyboard");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr  bgcolor='#CDEDED' style='font-weight: bold;'><td width='450'>keyBoardInfo</td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr><td >keyBoard desc：" + p.Description + "</td></tr>";
+                    info += "<tr><td >keyBoard name：" + p.Name + "</td></tr>";
+                    info += "<tr><td >keyBoard status：" + p.Status + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function mainBoard() {
+                var properties = service.ExecQuery("SELECT * FROM Win32_BaseBoard");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr bgcolor='#CDEDED' style='font-weight: bold;'><td width='450'>mainBoard </td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr style='color: red'><td >mainBoard ID：" + p.SerialNumber + "</td></tr>";
+                    info += "<tr><td >" + p.HostingBoard + "</td></tr>";
+                    info += "<tr><td >mainBoard Manufacturer：" + p.Manufacturer + "</td></tr>";
+                    info += "<tr><td >mainBoard PoweredOn：" + p.PoweredOn + "</td></tr>";
+                    info += "<tr><td >mainBoard Product：" + p.Product + "</td></tr>";
+                    info += "<tr><td >mainBoard Version：" + p.Version + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function disk() { 
+                var properties = service.ExecQuery("SELECT * FROM Win32_DiskDrive");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr bgcolor='#CDEDED' style='font-weight: bold;' ><td width='450'>disk </td></tr>";
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr style='color: red'><td >disk number:" + p.signature + "</td></tr>";
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function raminfo() {
+                var system = new Enumerator(service.ExecQuery("SELECT * FROM Win32_ComputerSystem")).item();
+
+                var physicMenCap = Math.ceil(system.TotalPhysicalMemory / 1024 / 1024); 
+                var memory = new Enumerator(service.ExecQuery("SELECT * FROM Win32_PhysicalMemory"));
+                for (var mem = [], i = 0; !memory.atEnd(); memory.moveNext()) {
+                    mem[i++] = {
+                        cap: memory.item().Capacity / 1024 / 1024,
+                        speed: memory.item().Speed
+                    };
+                }
+
+                var info = "<table border=1>";
+                info += "<tr bgcolor='#CDEDED' style='font-weight: bold;' ><td width='450'>ram </td></tr>";
+                info += "<tr style='color: red'><td >ram totals：" + (mem[0].cap + mem[1].cap) + "M</td></tr>";
+                info += "<tr style='color: red'><td >phycal ram：" + physicMenCap + "M</td></tr>";
+                info += "</table>";
+                return info;
+            }
+            function ipinfo() {
+
+                var properties = service.ExecQuery("SELECT * FROM Win32_NetworkAdapterConfiguration Where IPEnabled=TRUE");
+                var e = new Enumerator(properties);
+                var info = "<table border=1>";
+                info += "<tr bgcolor='#CDEDED' style='font-weight: bold;' ><td width='450'>network：</td></tr>";
+                var i = 1;
+                for (; !e.atEnd(); e.moveNext()) {
+                    var p = e.item();
+                    info += "<tr style='color: red'><td >MAC" + i + "：" + p.MACAddress + "</td></tr>";
+                    info += "<tr style='color: red'><td >IP" + i + "：" + p.IPAddress(0) + "</td></tr>";
+                    i++;
+                }
+                info += "</table>";
+                return info;
+            }
+
+            function pcInfo() { 
+
+                var info = cpuInfo();
+                info += disk();
+                info += raminfo();
+                info += mainBoard();
+                info += ipinfo();
+                info += keyBoardInfo();
+                info += RomInfo();
+                info += softDisk();
+
+                document.getElementById('elInfo').innerHTML = info;
+                return info;
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <INPUT id="Button1" type="button" value="browser info" name="Button1" language=javascript onclick="allinfo()">
+
+        <INPUT id="Button1" type="button" value="client info" name="Button1" language=javascript onclick="pcInfo()">
+
+        <div id="elInfo">
+
+        </div>
+    </body>
+
+</html>
