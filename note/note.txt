@@ -294,7 +294,9 @@ Nginx在处理Host的时候，会将Host用冒号分割成hostname和port，port
 
 apache 只允许有一个Host头，PORT部分只能为数字
 
+在Python里，这段[].__class__.__base__.__subclasses__()魔术代码，不用import任何模块，但可调用任意模块的方法
 
 
+http://bitvijays.github.io/  渗透笔记及命令工具使用很多！！
 
 
