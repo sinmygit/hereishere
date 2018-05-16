@@ -316,4 +316,24 @@ findstr /V /L W3AllLov3DonaldTrump c:\ADS\procexp.exe > c:\ADS\file.txt:procexp.
 expand \\ip\1.txt 1.txt
 makecab \\ip\1.txt 1.cab;extrac32 1.cab;
 
+v2ray 透明代理：
+iptables 配置：
+iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -N v2ray
+iptables -t nat -A v2ray -d 10.10.0.0/16 -j RETURN
+iptables -t nat -A v2ray -p tcp -j REDIRECT --to-ports 1081
 
+v2ray 设置：
+"inboundDetour":[
+{
+	"domainOverride":["tls","http"],
+	"port":1081,
+	"protocol":"dokodemo-door",
+	"settings":{
+		"network":"tcp,udp",
+		"followRedirect":true
+	}
+}
+]
